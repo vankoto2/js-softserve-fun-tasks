@@ -1,10 +1,11 @@
-.users {
+form {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.users-list {
+.user-form {
+  background-color: white;
   margin: 5rem;
   display: flex;
   flex-direction: column;
@@ -13,13 +14,19 @@
   width: 50%;
   background-color: white;
   border-radius: 5px;
+}
+.user-form__control {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
   padding: 1rem;
 }
 
-.user {
+.user-form__controls {
   display: flex;
-  padding: 1rem;
-  margin: 0.5rem 0rem ;
-  border: 1px solid black;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  text-align: left;
+  margin: 10px 0px;
   font-weight: bold;
 }

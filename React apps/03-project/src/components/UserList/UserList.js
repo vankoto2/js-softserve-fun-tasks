@@ -4,7 +4,7 @@ import "./UserList.css";
 
 const UserList = (props) => {
   return (
-    <div className="test">
+    <div className="users">
       <div className="users-list">
         {props.users.map((user) => (
           <div className="user" key={user.id}>
