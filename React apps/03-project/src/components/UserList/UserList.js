@@ -1,13 +1,17 @@
 import React from "react";
 
+import "./UserList.css";
+
 const UserList = (props) => {
-  console.log(props.users[0]);
   return (
-    <div>
-      {props.users.map((test) => (
-          console.log(test.userName),
-        <div>{test.userName}</div>
-      ))}
+    <div className="test">
+      <div className="users-list">
+        {props.users.map((user) => (
+          <div className="user" key={user.id}>
+            {user.userName} ({user.age} years old)
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
