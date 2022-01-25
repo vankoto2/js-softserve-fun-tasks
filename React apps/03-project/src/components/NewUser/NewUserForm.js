@@ -6,7 +6,6 @@ import "./NewUserForm.css";
 const NewUserForm = (props) => {
   const [enteredName, setentEredName] = useState("");
   const [enteredAge, setEnteredAge] = useState("");
-  const [userInfo, setUserInfo] = useState("");
 
   const nameChangeHandler = (event) => {
     setentEredName(event.target.value);
@@ -16,15 +15,17 @@ const NewUserForm = (props) => {
     setEnteredAge(event.target.value);
   };
   const formSubmitHandler = (event) => {
-      if (enteredName === '') {
-          alert('test')
-      }
     event.preventDefault();
-    setUserInfo({
-      id: Math.random().toString(),
-      enteredName,
-      enteredAge,
-    });
+
+    if (enteredName.trim().length === 0 || enteredAge.trim().length === 0) {
+      return;
+    }
+    if (+enteredAge < 0) {
+      return;
+    }
+    console.log(enteredName, enteredAge);
+
+    props.onAddUser(enteredName, enteredAge);
     setentEredName("");
     setEnteredAge("");
   };
@@ -47,7 +48,7 @@ const NewUserForm = (props) => {
           ></input>
         </div>
         <div>
-          <Button userInput={userInfo} />
+          <Button />
         </div>
       </div>
     </form>

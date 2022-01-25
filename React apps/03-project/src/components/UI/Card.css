@@ -1,0 +1,11 @@
+.user-form {
+    background-color: white;
+    margin: 5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: stretch;
+    width: 50%;
+    background-color: white;
+    border-radius: 10px;
+  }

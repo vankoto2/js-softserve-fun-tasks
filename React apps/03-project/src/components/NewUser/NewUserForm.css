@@ -13,7 +13,7 @@ form {
   align-content: stretch;
   width: 50%;
   background-color: white;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 .user-form__control {
   display: flex;
