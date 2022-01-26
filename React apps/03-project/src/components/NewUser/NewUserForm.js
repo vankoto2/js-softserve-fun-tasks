@@ -1,43 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import Button from "../UI/Button";
 import ErrorModal from "../UI/ErrorModal";
+import Wrapper from "../Helpers/Wrapper";
 import "./NewUserForm.css";
 
 const NewUserForm = (props) => {
-  const [enteredName, setentEredName] = useState("");
-  const [enteredAge, setEnteredAge] = useState("");
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
+
   const [error, setError] = useState();
 
-  const nameChangeHandler = (event) => {
-    setentEredName(event.target.value);
-  };
-
-  const ageChangeHandler = (event) => {
-    setEnteredAge(event.target.value);
-  };
   const formSubmitHandler = (event) => {
     event.preventDefault();
+    const enteredUserName = nameInputRef.current.value;
+    const enteredUserAge = ageInputRef.current.value;
 
-    if (enteredName.trim().length === 0 || enteredAge.trim().length === 0) {
+    if (enteredUserName.trim().length === 0 || enteredUserAge.trim().length === 0) {
       setError({
         title: "Invalid input",
-        massage: "Please enter a valid name and age (non-empty values).",
+        message: "Please enter a valid name and age (non-empty values).",
       });
       return;
     }
-    if (+enteredAge < 1) {
+    if (+enteredUserAge < 1) {
       setError({
         title: "Invalid age",
-        massage: "Please enter a valid age (>0).",
+        message: "Please enter a valid age (>0).",
       });
       return;
     }
-    console.log(enteredName, enteredAge);
 
-    props.onAddUser(enteredName, enteredAge);
-    setentEredName("");
-    setEnteredAge("");
+    props.onAddUser(enteredUserName, enteredUserAge);
+    nameInputRef.current.value = '';
+    ageInputRef.current.value = '';
   };
 
   const errorHandler = () => {
@@ -45,22 +41,20 @@ const NewUserForm = (props) => {
   };
 
   return (
-    <div>
-      {error && <ErrorModal title={error.title} massage={error.massage} onConfirm={errorHandler}/>}
+    <Wrapper>
+      {error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler}/>}
       <form onSubmit={formSubmitHandler}>
         <div className="user-form">
           <div className="user-form__control">
             <div className="user-form__controls">Username</div>
             <input
               type="text"
-              value={enteredName}
-              onChange={nameChangeHandler}
+              ref={nameInputRef}
             ></input>
             <div className="user-form__controls">Age (Years)</div>
             <input
               type="number"
-              value={enteredAge}
-              onChange={ageChangeHandler}
+              ref={ageInputRef}
             ></input>
           </div>
           <div>
@@ -68,7 +62,7 @@ const NewUserForm = (props) => {
           </div>
         </div>
       </form>
-    </div>
+    </Wrapper>
   );
 };
 

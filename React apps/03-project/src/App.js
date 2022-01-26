@@ -14,7 +14,6 @@ function App() {
 
   const addUserHandler = (enteredName, enteredAge) => {
     setUsers((prevUserAdded) => {
-      console.log(users);
       return [...prevUserAdded, {
         id: Math.random().toString(),
         userName: enteredName,
@@ -24,10 +23,10 @@ function App() {
   };
 
   return (
-    <div>
+    <>
       <NewUserForm onAddUser={addUserHandler} />
       <UserList usersInfo={users}></UserList>
-    </div>
+    </>
   );
 }
 
