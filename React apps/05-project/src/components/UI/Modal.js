@@ -1,6 +1,6 @@
 import { Fragment } from "react/cjs/react.production.min";
-import ReactDom from "react-dom";
 
+import ReactDom from "react-dom";
 import classes from "./Modal.module.css";
 
 const Backdrop = (props) => {
