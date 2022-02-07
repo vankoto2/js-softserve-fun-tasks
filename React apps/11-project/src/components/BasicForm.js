@@ -36,15 +36,22 @@ const BasicForm = (props) => {
 
   let formIsValid = false;
 
-  if (enteredLastNameIsValid && enteredEmailIsValid && enteredFirstNameIsValid) {
+  if (
+    enteredLastNameIsValid &&
+    enteredEmailIsValid &&
+    enteredFirstNameIsValid
+  ) {
     formIsValid = true;
   }
-
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
+    if (!formIsValid) {
+      return;
+    }
 
+    console.log(enteredFirstNameValue, enteredLastNameValue, enteredEmailValue);
 
     resetFirstNameInput();
     resetLastNameInput();
@@ -73,6 +80,9 @@ const BasicForm = (props) => {
             value={enteredFirstNameValue}
             onBlur={firstNameBlurHandler}
           />
+          {firstNameHasError && (
+            <p className="error-text">Please enter a first name.</p>
+          )}
         </div>
         <div className={lastNameInputClasses}>
           <label htmlFor="name">Last Name</label>
@@ -83,6 +93,9 @@ const BasicForm = (props) => {
             value={enteredLastNameValue}
             onBlur={lastNameBlurHandler}
           />
+          {lastNameHasError && (
+            <p className="error-text">Please enter a last name.</p>
+          )}
         </div>
       </div>
       <div className={emailInputClasses}>
@@ -94,6 +107,9 @@ const BasicForm = (props) => {
           value={enteredEmailValue}
           onBlur={emailBlurHandler}
         />
+        {emailHasError && (
+          <p className="error-text">Please enter a valid email.</p>
+        )}
       </div>
       <div className="form-actions">
         <button disabled={!formIsValid}>Submit</button>
