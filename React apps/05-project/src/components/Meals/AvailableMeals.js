@@ -6,14 +6,20 @@ import classes from "./AvailableMeals.module.css";
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
-  const [isLoading, setIsloading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [httpError, setHttpError] = useState();
 
   useEffect(() => {
     const fetchMeals = async () => {
-      setIsloading(true);
+      setIsLoading(true);
       const response = await fetch(
         "https://project-51538-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
       );
+
+      if (!response) {
+        throw new Error("Something went wrong!");
+      }
+
       const responseDate = await response.json();
 
       const loadedMeals = [];
@@ -28,18 +34,28 @@ const AvailableMeals = () => {
       }
 
       setMeals(loadedMeals);
-      setIsloading(false);
+      setIsLoading(false);
     };
-
-    fetchMeals();
+    fetchMeals().catch((error) => {
+      setIsLoading(false);
+      setHttpError(error.message);
+    });
   }, []);
 
   if (isLoading) {
     return (
-      <section className={classes.mealIsLoading}>
+      <section className={classes.mealsIsLoading}>
         <p>Loading...</p>
       </section>
-    )
+    );
+  }
+
+  if (httpError) {
+    return (
+      <section className={classes.mealsError}>
+        <p>{httpError}</p>
+      </section>
+    );
   }
 
   const mealsList = meals.map((meal) => (
