@@ -6,9 +6,11 @@ import classes from "./AvailableMeals.module.css";
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
+  const [isLoading, setIsloading] = useState(true);
 
   useEffect(() => {
     const fetchMeals = async () => {
+      setIsloading(true);
       const response = await fetch(
         "https://project-51538-default-rtdb.europe-west1.firebasedatabase.app/meals.json"
       );
@@ -25,11 +27,20 @@ const AvailableMeals = () => {
         });
       }
 
-      setMeals(loadedMeals)
+      setMeals(loadedMeals);
+      setIsloading(false);
     };
 
     fetchMeals();
   }, []);
+
+  if (isLoading) {
+    return (
+      <section className={classes.mealIsLoading}>
+        <p>Loading...</p>
+      </section>
+    )
+  }
 
   const mealsList = meals.map((meal) => (
     <MealItem
