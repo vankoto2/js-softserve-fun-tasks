@@ -33,8 +33,8 @@ const Checkout = (props) => {
 
     setFormInputsValidity({
       name: enteredNameIsValid,
-      street: enteredStreet,
-      city: enteredCity,
+      street: enteredStreetIsValid,
+      city: enteredCityIsValid,
       postal: enteredPostalIsValid,
     });
 
@@ -47,6 +47,13 @@ const Checkout = (props) => {
     if (!formIsValid) {
       return;
     }
+
+    props.onConfirm({
+        name: enteredName,
+        street: enteredStreet,
+        city: enteredCity,
+        postal: enteredPostal,
+    })
   };
 
   return (
