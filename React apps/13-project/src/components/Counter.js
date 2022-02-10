@@ -1,4 +1,5 @@
 // import { Component } from "react";
+import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { counterActions } from "../store";
@@ -7,7 +8,8 @@ import classes from "./Counter.module.css";
 const Counter = () => {
   const dispatch = useDispatch();
   const counter = useSelector((state) => state.counter.counter);
-  const show = useSelector((state) => state.counter.showCounter)
+  const show = useSelector((state) => state.counter.showCounter);
+  const auth = useSelector((state) => state.auth.isAuthenticated);
 
   const incrementHandler = () => {
     dispatch(counterActions.increment());
@@ -25,7 +27,7 @@ const Counter = () => {
     dispatch(counterActions.toggleCounter());
   };
 
-  return (
+  const counterElement = (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
       {show && <div className={classes.value}>{counter}</div>}
@@ -37,6 +39,8 @@ const Counter = () => {
       <button onClick={toggleCounterHandler}>Toggle Counter</button>
     </main>
   );
+
+  return <Fragment>{auth && counterElement}</Fragment>;
 };
 
 export default Counter;
