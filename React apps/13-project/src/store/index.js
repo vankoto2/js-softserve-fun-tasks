@@ -1,4 +1,4 @@
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 
 import counterSlice from "./counter-slice";
 import authSlice from "./auth-slice";
