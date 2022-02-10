@@ -1,12 +1,10 @@
-import { Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { authActions } from "../store/index";
 import classes from "./Auth.module.css";
 
 const Auth = () => {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth.isAuthenticated);
 
   const loginHandler = () => {
     dispatch(authActions.login());
@@ -30,7 +28,7 @@ const Auth = () => {
     </main>
   );
 
-  return <Fragment>{!auth && login}</Fragment>;
+  return login;
 };
 
 export default Auth;
