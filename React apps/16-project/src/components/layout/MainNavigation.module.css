@@ -13,25 +13,25 @@
   color: white;
 }
 
-.nav ul {
+.header nav ul {
   list-style: none;
   display: flex;
   margin: 0;
   padding: 0;
 }
 
-.nav li {
+.header nav li {
   margin-left: 1.5rem;
   font-size: 1.25rem;
 }
 
-.nav a {
+.header nav a {
   text-decoration: none;
   color: #88dfdf;
 }
 
-.nav a:hover,
-.nav a:active,
-.nav a.active {
+.header nav a:hover,
+.header nav a:active,
+.header nav a.active {
   color: #e6fcfc;
 }
