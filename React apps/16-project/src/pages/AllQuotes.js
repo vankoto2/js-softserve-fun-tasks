@@ -1,7 +1,7 @@
 import QuoteList from "../components/quotes/QuoteList";
 
-const AllQuote = () => {
-  return <QuoteList />;
+const AllQuotes = () => {
+  return <h1>All Quotes</h1>;
 };
 
-export default AllQuote;
+export default AllQuotes;

@@ -1,7 +1,7 @@
 import QuoteForm from "../components/quotes/QuoteForm";
 
-const AddQuote = () => {
+const NewQuote = () => {
   return <QuoteForm />;
 };
 
-export default AddQuote;
+export default NewQuote;
