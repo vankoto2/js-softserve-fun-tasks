@@ -1,23 +1,6 @@
-import MeetupList from "../components/meetups/MeetupList";
+import { MongoClient } from "mongodb";
 
-const DUMMY_MEETUPS = [
-  {
-    id: "m1",
-    title: "A First Meetup",
-    image:
-      "https://digitalnomads.world/wp-content/uploads/2021/12/varna-digital-nomads.jpg.webp",
-    address: "Varna",
-    description: "First test",
-  },
-  {
-    id: "m2",
-    title: "A Second Meetup",
-    image:
-      "https://c7.alamy.com/comp/2B3NG62/aerial-view-by-drone-of-state-opera-house-varna-bulgaria-europe-2B3NG62.jpg",
-    address: "Varna",
-    description: "Second test",
-  },
-];
+import MeetupList from "../components/meetups/MeetupList";
 
 const HomePage = (props) => {
   return <MeetupList meetups={props.meetups}>HomePage</MeetupList>;
@@ -35,9 +18,25 @@ const HomePage = (props) => {
 // }
 
 export async function getStaticProps() {
+  const client = await MongoClient.connect(
+    "mongodb+srv://vankoto:3LRDqPqLtl3BbZvF@cluster0.1uabt.mongodb.net/meetups?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+
+  const meetupsCollection = db.collection("meetups");
+
+  const meetups = await meetupsCollection.find().toArray();
+
+  client.close();
+
   return {
     props: {
-      meetups: DUMMY_MEETUPS,
+      meetups: meetups.map((meetup) => ({
+        title: meetup.title,
+        address: meetup.address,
+        image: meetup.image,
+        id: meetup._id.toString(),
+      })),
     },
     revalidate: 10,
   };
