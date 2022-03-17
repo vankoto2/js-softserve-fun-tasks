@@ -11,6 +11,8 @@ firebase-debug.log
 # dependencies
 *node_modules
 
+*.next
+
 # IDEs and editors
 /.idea
 .project
